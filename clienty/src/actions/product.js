@@ -13,7 +13,7 @@ export const getProducts = () => async (dispatch) => {
 
 export const createProduct = (product) => async (dispatch) => {
   try {
-    const { data } = await api.createProduct(post);
+    const { data } = await api.createProduct(product);
 
     dispatch({ type: CREATE, payload: data });
   } catch (error) {
@@ -23,7 +23,7 @@ export const createProduct = (product) => async (dispatch) => {
 
 export const updateProduct = (id, product) => async (dispatch) => {
   try {
-    const { data } = await api.updateProduct(id, post);
+    const { data } = await api.updateProduct(id, product);
 
     dispatch({ type: UPDATE, payload: data });
   } catch (error) {

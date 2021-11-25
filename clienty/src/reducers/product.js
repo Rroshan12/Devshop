@@ -1,16 +1,16 @@
 import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
-export default (product = [], action) => {
+export default (products = [], action) => {
   switch (action.type) {
     case FETCH_ALL:
       return action.payload;
     case CREATE:
-      return [...product, action.payload];
+      return [...products, action.payload];
     case UPDATE:
-      return product.map((item) => (item._id === action.payload._id ? action.payload : product));
+      return products.map((item) => (item._id === action.payload._id ? action.payload : products));
     case DELETE:
-      return product.filter((item) => item._id !== action.payload);
+      return products.filter((item) => item._id !== action.payload);
     default:
-      return product;
+      return products;
   }
 };
