@@ -1,9 +1,13 @@
-import React ,{useEffect} from 'react'
+import React ,{useEffect,useState} from 'react'
 import Aside from '../components/Aside/Aside'
 import { useDispatch,useSelector} from 'react-redux';
 import { getProducts } from '../actions/product';
+import FileBase from 'react-file-base64';
+import { createProduct } from '../actions/product';
 
 function Admin() {
+    const [productData, setProductData] = useState({ title: '', description: '', price:'', image: '',category_id:'' });
+  
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -11,6 +15,16 @@ function Admin() {
     }, [ dispatch]);
     const product = useSelector((state) => state);
     console.log(product.products);
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(productData);
+    
+      
+          dispatch(createProduct(productData ));
+       
+      };
 
 
     return (
@@ -55,27 +69,26 @@ function Admin() {
          <Aside/>
            <div class="col-md-9">
             <h1>Add Products</h1>
-<form>
+<form onSubmit={handleSubmit}>
   <div class="mb-3">
     <label  class="form-label">Title</label>
-    <input type="text" class="form-control" />
+    <input type="text" class="form-control" value={productData.title} onChange={(e) => setProductData({ ...productData, title: e.target.value })} />
   </div>
   <div class="mb-3">
     <label  class="form-label">Category-id</label>
-    <input type="text" class="form-control" />
+    <input type="text" class="form-control" value={productData.category_id} onChange={(e) => setProductData({ ...productData, category_id: e.target.value })} />
   </div>
   <div class="mb-3">
     <label  class="form-label">Description</label>
-    <input type="text" class="form-control" />
+    <input type="text" class="form-control" value={productData.description} onChange={(e) => setProductData({ ...productData, description: e.target.value })} />
   </div>
   <div class="mb-3">
-    <label  class="form-label">Image</label>
-    <input type="text" class="form-control" />
+ <FileBase type="file" multiple={false} onDone={({ base64 }) => setProductData({ ...productData, image: base64 })} />
   </div>
 
   <div class="mb-3">
     <label  class="form-label">Price</label>
-    <input type="text" class="form-control" />
+    <input type="text" class="form-control" value={productData.price} onChange={(e) => setProductData({ ...productData, price: e.target.value })} />
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>
