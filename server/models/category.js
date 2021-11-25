@@ -2,15 +2,15 @@ import mongoose from 'mongoose';
 
 const categorySchema = mongoose.Schema({
 
-  title: String,
-  createdAt: {
-    type: Date,
-    default: new Date(),
-},
-updatedAt: {
-    type: Date,
-    default: new Date(),
-},
+    title: { type: String, trim: true, required: true },
+    createdAt: {
+        type: Date,
+        default: new Date(),
+    },
+    updatedAt: {
+        type: Date,
+        default: new Date(),
+    },
 
 
 
@@ -18,6 +18,6 @@ updatedAt: {
 
 })
 
-var Category  = mongoose.model('Category', categorySchema);
+var Category = mongoose.model('Category', categorySchema);
 
-export default Category ;
+export default Category;

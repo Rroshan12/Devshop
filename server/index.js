@@ -22,7 +22,7 @@ app.use(cors());
 app.get('/api', (req, res) => {
   res.send("Devshop api");
 });
-app.use('/api/company', productRoute);
+app.use('/api/product', productRoute);
 app.use('/api/category', categoryRoute);
 
 
